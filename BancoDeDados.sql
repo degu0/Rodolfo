@@ -3,8 +3,10 @@ create database Obras;
 use obras;
 
 create table login(
+	id int auto_increment,
 	usuario varchar(10) unique,
-    senha varchar(10)
+    senha varchar(10),
+    primary key (id)
 );
 
 create table cadastro_palavras(
