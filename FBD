@@ -1,0 +1,33 @@
+no Formulario em HTML, tranforma em php. E adiciona no from (action="formulario.php" method="POST")
+
+<?php
+Para confirmar que esta pegando a conexao
+	if(isset($_POST['submit'])){
+	print_r($_POST['nome']);
+	print_r($_POST['Email']);
+	print_r($_POST['telefone']);
+} 
+
+include_once('config.php');
+
+$nome = $_POST['nome']:
+variavel = $_POST[Paramento que esta salvo no formulario];
+
+$result = mysqli_query($conexao, "INSERT INT nomeDaTabela(variaveis que esta salvo na Tabela) VALUES ('As variaveis passados anteriomente')");
+
+?>
+
+<?php
+	$dbHost = 'LocalHost';
+	$dbUsername = 'root';
+	$dbPassaword = '';
+	$dbName = 'NomeDoBancoDeDados':
+
+	$conexao = new mysqli($dbHost,$dbUsername, $dbPassword,$dbName);
+
+	 if($conexao->connect_errno){
+		echo "Erro";
+	}else{
+		echo "Conexao efetuada com sucesso";
+	}
+?>
