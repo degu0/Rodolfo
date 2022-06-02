@@ -10,15 +10,17 @@ create table login(
 );
 
 create table cadastro_palavras(
-	palavra varchar(15),
-    sentido text,
-    trecho text,
-    dias_atuais text,
-    classe enum("substantivo", "artigo", "adjetivo", "numeral", "pronome", "verbo", "advérbio", "preposição", "conjunção", "interjeição"),
-	pagina int(5),
-    paragrafo int(3),
-    aparicao int(2),
-    linha int(7)
+	expressao varchar(25) not null,
+	classe enum("Substantivo", "Artigo", "Adjetivo", "Numeral", "Pronome", "Verbo", "Advérbio", "Preposição", "Conjunção", "Interjeição","Preposição + artigo") not null,
+	genero enum("Masculino", "Feminino"),
+	numero enum("Singular", "Plural"),
+	circustancia varchar(20),
+	modoVerbal enum("Indicativo", "Subjutivo", "Imperativo"),
+	tempoVerbal varchar(25),
+	pessoaVerbal enum(1, 2 ,3),
+	numeroVerbal enum("singular", "plural"),	
+    	sentido text,
+	primary key(expressao)
 );
 
 insert into cadastro_palavras (palavra,sentido,trecho,dias_atuais,classe,pagina,paragrafo, aparicao,linha)
@@ -32,21 +34,22 @@ create table Livro(
 );
 
 create table BuscaParagrafo(
-	paragrafo text,
-    posicaoParagrafo int,
+	paragrafo text not null,
+    posicaoParagrafo int not null,
     primary key(posicaoParagrafo)
 );
 
 create table BuscaLinha(
-	linha text,
-    posicaoLinha int,
+	linha text not null,
+    posicaoLinha int not null,
     primary key(posicaoLinha)
 );
-create table Termo(
-	Term varchar(20),
+create table Termo(    
+    Tr_expressao varchar(50),
     Frequencia int,
     Tr_aparicaoNosParagrafos int,
     Tr_aparicaoNasLinhas int,
+    constraint fk_Termo foreign key (Tr_expressao) references cadastro_palavra(expressao),	
     constraint fk_TermoParagrafo foreign key (Tr_aparicaoNosParagrafos) references BuscaParagrafo(posicaoParagrafo),
     constraint fk_TermoLinhas foreign key (Tr_aparicaoNasLinhas)references BuscaLinha(posicaoLinha)
 );
@@ -62,7 +65,7 @@ values ("
 Auto de moralidade composto por Gil Vicente por contemplação da
 ",  1);
 
-insert into Termo(Term, Frequencia)
+insert into Termo(Termo, Frequencia)
 values("Auto", 1);
 
 select * from Termo;
@@ -848,3 +851,11 @@ FIM", "Ze");
  
 select * from livro; 
 select * from cadastro_palavras;
+
+
+   ##trecho text,
+   ##dias_atuais text,
+   ##pagina int(5),
+   ##paragrafo int(3),
+   ##aparicao int(2),
+   ##linha int(7)
